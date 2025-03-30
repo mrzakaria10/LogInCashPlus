@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="login" method="post">
-	<input type="text" name="username" placeholder="Username" required><br>
+	<input type="email" name="email" placeholder="zakariajhd@gmail.com" required><br>
 	<input type="password" name="password" placeholder="PassWord" required><br>
 	<button type="submit">Login</button>
 	</form>
