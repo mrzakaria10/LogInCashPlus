@@ -13,35 +13,48 @@ import com.logincashplus.dao.UserDAO;
 import com.logincashplus.models.User;
 import com.logincashplus.utils.DatabaseConnection;
 
+
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	protected void dopost(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException, Throwable {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		// validation des champs
+		String erreur = null;
+		if (email == null || email.trim().isEmpty() || email.length() > 50) {
+            erreur = "Le nom est invalide (vide ou trop long).";
+            
+		} else if (password == null || password.trim().isEmpty() || password.length() > 50) {
+            erreur = "Le prénom est invalide (vide ou trop long).";
+        }
+		
+		if (erreur != null) {
+            request.setAttribute("erreur", erreur);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+		
+		try (Connection connection = DatabaseConnection.getConnection()) {
+			UserDAO userDAO = new UserDAO(connection);
+			User user = new User(0, email, password);
+			userDAO.ajouterUser(user);
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+        response.sendRedirect(request.getContextPath() + "");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+
+		
+		
 	}
 
 }
