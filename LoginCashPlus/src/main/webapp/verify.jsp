@@ -11,7 +11,10 @@
 
     <h2>Verify Your Email</h2>
 
-    <form action="verify" method="post">
+    <form action="VerifyServlet" method="post">
+    <label>Email:</label>
+        <input type="email" name="email" required>
+        
         <label for="verificationCode">Enter the verification code:</label>
         <input type="text" name="verificationCode" required><br>
 

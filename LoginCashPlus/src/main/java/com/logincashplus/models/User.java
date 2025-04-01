@@ -35,7 +35,6 @@ public class User {
 	  public void setVerified(boolean isVerified) { this.isVerified = isVerified; }
 	
 	 
-	  
-	  
+	 
 	  
 }

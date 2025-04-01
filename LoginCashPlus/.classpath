@@ -13,5 +13,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ZAKARIA.DERKAOUI/Desktop/ODC-2025.02.03 Fullslack/files JAR/jbcrypt-0.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
